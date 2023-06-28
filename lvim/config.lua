@@ -6,9 +6,12 @@
 -- Options
 lvim.format_on_save = true
 lvim.builtin.nvimtree.active = false -- Use neo-tree instead of nvim-tree
-lvim.builtin.treesitter.matchup.enable = true
--- lvim.builtin.formatoptions.textwidth = 80
+-- lvim.builtin.treesitter.matchup.enable = true
 lvim.transparent_window = false
+
+-- vim.opt.textwidth = 80
+
+-- lvim.builtin.cmp.formatting.max_width = 80
 
 
 
@@ -167,13 +170,12 @@ lvim.plugins = {
     end
   },
 
-  {
-    "andymass/vim-matchup",
-    event = "CursorMoved",
-    config = function()
-      vim.g.matchup_matchparen_offscreen = { method = "popup" }
-    end,
-  },
+  -- {
+  --   "andymass/vim-matchup",
+  --   config = function()
+  --     vim.g.matchup_matchparen_offscreen = { method = "popup" }
+  --   end,
+  -- },
 
   {
     "folke/lsp-colors.nvim",
