@@ -6,9 +6,17 @@
 -- Options
 lvim.format_on_save = true
 lvim.builtin.nvimtree.active = false -- Use neo-tree instead of nvim-tree
-lvim.builtin.treesitter.matchup.enable = true
+-- lvim.builtin.treesitter.matchup.enable = true
 -- lvim.builtin.formatoptions.textwidth = 80
 lvim.transparent_window = false
+lvim.builtin.cmp.sources = {
+  { name = 'nvim_lsp' },
+  { name = 'luasnip' },
+  { name = 'buffer' },
+  { name = 'path' }
+}
+
+-- lvim.builtin.cmp.sources = 'path'
 
 
 
@@ -29,9 +37,41 @@ lvim.builtin.which_key.mappings["e"] = {}
 
 lvim.builtin.terminal.open_mapping = "<c-t>"
 
--- Centers cursor when moving
-lvim.keys.normal_mode["<C-d>"] = "<C-d>zz"
-lvim.keys.normal_mode["<C-u>"] = "<C-u>zz"
+
+lvim.keys.insert_mode["jk"] = "<Esc>"
+lvim.keys.insert_mode["jj"] = "<Esc>"
+
+vim.opt.foldcolumn = '1'
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldmethod = 'manual'
+vim.opt.foldenable = true
+
+
+-- lvim.autocommands = {
+--   {
+--     "BufNewFile", {
+--     pattern = { "*.py" },
+--     callback = function()
+--       local buf = vim.api.nvim_get_current_buf()
+--       vim.api.nvim_buf_set_lines(buf, 0, 0, false, { "#!/usr/bin/env python", "# -*- coding: utf-8 -*-", "" })
+--       vim.api.nvim_win_set_cursor(0, { 4, 0 })
+--     end
+
+--   }
+--   },
+--   {
+--     "BufNewFile", {
+--     pattern = { "*.sh" },
+--     callback = function()
+--       local buf = vim.api.nvim_get_current_buf()
+--       vim.api.nvim_buf_set_lines(buf, 0, 0, false, { "#!/bin/bash", "# -*- coding: utf-8 -*-", "" })
+--       vim.api.nvim_win_set_cursor(0, { 4, 0 })
+--     end
+--   }
+--   },
+-- }
+
 
 
 -- Plugins keymapping
@@ -49,6 +89,8 @@ lvim.keys.normal_mode["<F4>"] = "<Cmd>NeoTreeFloatToggle<CR>"
 
 -- Symbols Outline
 lvim.keys.normal_mode["<F2>"] = "<Cmd>SymbolsOutline<CR>"
+
+
 
 
 -- Custom Plugins
@@ -144,6 +186,18 @@ lvim.plugins = {
             ["h"] = "navigate_up",
             ["o"] = "open",
             ["l"] = "open",
+            ["a"] = {
+              "add",
+              config = {
+                show_path = "relative"
+              }
+            },
+            ["A"] = {
+              "add_directory",
+              config = {
+                show_path = "relative"
+              }
+            }
           }
         },
         buffers = {
@@ -167,13 +221,13 @@ lvim.plugins = {
     end
   },
 
-  {
-    "andymass/vim-matchup",
-    event = "CursorMoved",
-    config = function()
-      vim.g.matchup_matchparen_offscreen = { method = "popup" }
-    end,
-  },
+  -- {
+  --   "andymass/vim-matchup",
+  --   event = "CursorMoved",
+  --   config = function()
+  --     vim.g.matchup_matchparen_offscreen = { method = "popup" }
+  --   end,
+  -- },
 
   {
     "folke/lsp-colors.nvim",
@@ -240,6 +294,18 @@ lvim.plugins = {
     end
   },
 
+  {
+    'susensio/magic-bang.nvim',
+    event = "BufNewFile",
+    cmd = "Bang",
+    config = function()
+      require('magic-bang').setup({
+        bins = {
+          py = 'python'
+        }
+      })
+    end
+  },
 
 
 }

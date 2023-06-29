@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Add conda autocompletion
-fpath+=/home/shaodi/Programs/conda-zsh-completion
+fpath+=/home/shaodi/Program/conda-zsh-completion
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -114,14 +114,14 @@ source $ZSH/oh-my-zsh.sh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/shaodi/Programs/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/shaodi/Program/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/shaodi/Programs/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/shaodi/Programs/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/shaodi/Program/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/shaodi/Program/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/shaodi/Programs/anaconda3/bin:$PATH"
+        export PATH="/home/shaodi/Program/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
