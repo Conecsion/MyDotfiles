@@ -22,16 +22,16 @@ lvim.builtin.cmp.sources = {
 
 
 
-lvim.builtin.which_key.mappings["1"] = { "<Cmd>BufferLineGoToBuffer 1<CR>", "Go to buffer 1" }
-lvim.builtin.which_key.mappings["2"] = { "<Cmd>BufferLineGoToBuffer 2<CR>", "Go to buffer 2" }
-lvim.builtin.which_key.mappings["3"] = { "<Cmd>BufferLineGoToBuffer 3<CR>", "Go to buffer 3" }
-lvim.builtin.which_key.mappings["4"] = { "<Cmd>BufferLineGoToBuffer 4<CR>", "Go to buffer 4" }
-lvim.builtin.which_key.mappings["5"] = { "<Cmd>BufferLineGoToBuffer 5<CR>", "Go to buffer 5" }
-lvim.builtin.which_key.mappings["6"] = { "<Cmd>BufferLineGoToBuffer 6<CR>", "Go to buffer 6" }
-lvim.builtin.which_key.mappings["7"] = { "<Cmd>BufferLineGoToBuffer 7<CR>", "Go to buffer 7" }
-lvim.builtin.which_key.mappings["8"] = { "<Cmd>BufferLineGoToBuffer 8<CR>", "Go to buffer 8" }
-lvim.builtin.which_key.mappings["9"] = { "<Cmd>BufferLineGoToBuffer 9<CR>", "Go to buffer 9" }
-lvim.builtin.which_key.mappings["0"] = { "<Cmd>BufferLineGoToBuffer 10<CR>", "Go to buffer 10" }
+lvim.builtin.which_key.mappings["1"] = { "<Cmd>BufferLineGoToBuffer 1<CR>", "which_key_ignore" }
+lvim.builtin.which_key.mappings["2"] = { "<Cmd>BufferLineGoToBuffer 2<CR>", "which_key_ignore" }
+lvim.builtin.which_key.mappings["3"] = { "<Cmd>BufferLineGoToBuffer 3<CR>", "which_key_ignore" }
+lvim.builtin.which_key.mappings["4"] = { "<Cmd>BufferLineGoToBuffer 4<CR>", "which_key_ignore" }
+lvim.builtin.which_key.mappings["5"] = { "<Cmd>BufferLineGoToBuffer 5<CR>", "which_key_ignore" }
+lvim.builtin.which_key.mappings["6"] = { "<Cmd>BufferLineGoToBuffer 6<CR>", "which_key_ignore" }
+lvim.builtin.which_key.mappings["7"] = { "<Cmd>BufferLineGoToBuffer 7<CR>", "which_key_ignore" }
+lvim.builtin.which_key.mappings["8"] = { "<Cmd>BufferLineGoToBuffer 8<CR>", "which_key_ignore" }
+lvim.builtin.which_key.mappings["9"] = { "<Cmd>BufferLineGoToBuffer 9<CR>", "which_key_ignore" }
+lvim.builtin.which_key.mappings["0"] = { "<Cmd>BufferLineGoToBuffer 10<CR>", "which_key_ignore" }
 lvim.builtin.which_key.mappings["e"] = {}
 
 
@@ -40,6 +40,9 @@ lvim.builtin.terminal.open_mapping = "<c-t>"
 
 lvim.keys.insert_mode["jk"] = "<Esc>"
 lvim.keys.insert_mode["jj"] = "<Esc>"
+
+
+vim.opt.ff = unix
 
 vim.opt.foldcolumn = '1'
 vim.opt.foldlevel = 99
@@ -83,12 +86,36 @@ lvim.builtin.which_key.mappings["j"] = {
   l = { "<cmd>HopVertical<cr>", "EasyMotion Vertical" },
 }
 
+lvim.builtin.which_key.mappings["j"] = {
+  name = "Easy Motion",
+  w = { "<cmd>HopWord<cr>", "EasyMotion by Word" },
+  a = { "<cmd>HopAnywhere<cr>", "EasyMotion Anywhere" },
+  l = { "<cmd>HopVertical<cr>", "EasyMotion Vertical" },
+  { mode = "v" },
+}
+
+lvim.keys.visual_mode["<Space>jl"] = "<Cmd>HopVertical<cr>"
+lvim.keys.visual_mode["<Space>ja"] = "<Cmd>HopAnywhere<cr>"
+lvim.keys.visual_mode["<Space>jw"] = "<Cmd>HopWord<cr>"
+
 -- NeoTree
 lvim.keys.normal_mode["<F3>"] = "<Cmd>NeoTreeFocusToggle<CR>"
 lvim.keys.normal_mode["<F4>"] = "<Cmd>NeoTreeFloatToggle<CR>"
 
 -- Symbols Outline
 lvim.keys.normal_mode["<F2>"] = "<Cmd>SymbolsOutline<CR>"
+
+-- Ranger like file manager
+lvim.keys.normal_mode["<F10>"] = "<Cmd>RnvimrToggle<CR>"
+
+
+
+-- Setting custom formatters
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  { name = "yapf" },
+
+}
 
 
 
@@ -283,7 +310,7 @@ lvim.plugins = {
 
   {
     "ray-x/lsp_signature.nvim",
-    event = "BufRead",
+    event = "InsertEnter",
     config = function() require "lsp_signature".on_attach() end,
   },
 
@@ -294,18 +321,38 @@ lvim.plugins = {
     end
   },
 
+  -- {
+  --   'susensio/magic-bang.nvim',
+  --   event = "BufNewFile",
+  --   cmd = "Bang",
+  --   config = function()
+  --     require('magic-bang').setup({
+  --       bins = {
+  --         py = 'python'
+  --       }
+  --     })
+  --   end
+  -- },
+
   {
-    'susensio/magic-bang.nvim',
-    event = "BufNewFile",
-    cmd = "Bang",
+    "kevinhwang91/rnvimr",
+    cmd = "RnvimrToggle",
     config = function()
-      require('magic-bang').setup({
-        bins = {
-          py = 'python'
-        }
-      })
+      vim.g.rnvimr_draw_border = 1
+      vim.g.rnvimr_pick_enable = 1
+      vim.g.rnvimr_bw_enable = 1
     end
   },
 
+  {
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+
+      })
+    end
+  }
 
 }

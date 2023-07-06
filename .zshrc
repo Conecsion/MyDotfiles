@@ -173,6 +173,9 @@ export RELION_PDFVIEWER_EXCUTABLE="microsoft-edge"
 # export __GLX_VENDOR_LIBRARY_NAME=nvidia;
 # export __VK_LAYER_NV_optimus=NVIDIA_only;
 
+# Enable IBUS IME for kitty
+export GLFW_IM_MODULE=ibus
+
 
 
 # Cryosparc Path
@@ -186,7 +189,8 @@ export PATH="/usr/bin/shaodi":$PATH
 
 
 
-export EDITOR="vim"
+export EDITOR="lvim"
+export SUDO_EDITOR=/home/shaodi/.local/bin/lvim
 
 export IMOD_DIR="/usr/local/imod_4.11.23"
 export PATH="/usr/local/IMOD/bin":$PATH
@@ -205,6 +209,8 @@ alias ll="lsd -l"
 alias zshconfig="vi ~/.zshrc"
 alias viconfig='vi ~/.config/lvim/config.lua'
 alias icat='kitty +kitten icat'
+alias vim="lvim"
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 fpath=($fpath "/home/shaodi/.zfunctions")
 
 
