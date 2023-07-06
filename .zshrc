@@ -146,7 +146,7 @@ export LD_LIBRARY_PATH=/usr/local/cuda-11.8/lib64${LD_LIBRARY_PATH:+:${LD_LIBRAR
 # source /usr/share/modules/init/zsh
 
 # Export Relion4.0 PATH
-export PATH="/home/shaodi/Programs/Relion/bin:$PATH"
+export PATH="/home/shaodi/Program/Relion/bin:$PATH"
 
 export PATH="/home/shaodi/.local/bin:$PATH"
 
