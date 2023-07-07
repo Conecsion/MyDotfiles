@@ -1,5 +1,5 @@
 -- Read the docs: https://www.lunarvim.org/docs/configuration
--- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
+--Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
 -- Forum: https://www.reddit.com/r/lunarvim/
 -- Discord: https://discord.com/invite/Xb9B4Ny
 
@@ -42,7 +42,7 @@ lvim.keys.insert_mode["jk"] = "<Esc>"
 lvim.keys.insert_mode["jj"] = "<Esc>"
 
 
-vim.opt.ff = unix
+vim.opt.ff = 'unix'
 
 vim.opt.foldcolumn = '1'
 vim.opt.foldlevel = 99
@@ -94,6 +94,10 @@ lvim.builtin.which_key.mappings["j"] = {
   { mode = "v" },
 }
 
+lvim.builtin.which_key.mappings['='] = {
+  "<cmd>Copilot setup<cr>", "Copilot"
+}
+
 lvim.keys.visual_mode["<Space>jl"] = "<Cmd>HopVertical<cr>"
 lvim.keys.visual_mode["<Space>ja"] = "<Cmd>HopAnywhere<cr>"
 lvim.keys.visual_mode["<Space>jw"] = "<Cmd>HopWord<cr>"
@@ -114,7 +118,6 @@ lvim.keys.normal_mode["<F10>"] = "<Cmd>RnvimrToggle<CR>"
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { name = "yapf" },
-
 }
 
 
@@ -263,6 +266,7 @@ lvim.plugins = {
 
   {
     "metakirby5/codi.vim",
+    event = "VeryLazy",
     cmd = "Codi",
   },
 
@@ -337,6 +341,7 @@ lvim.plugins = {
   {
     "kevinhwang91/rnvimr",
     cmd = "RnvimrToggle",
+    event = "VeryLazy",
     config = function()
       vim.g.rnvimr_draw_border = 1
       vim.g.rnvimr_pick_enable = 1
@@ -353,6 +358,14 @@ lvim.plugins = {
 
       })
     end
+  },
+
+  {
+    'github/copilot.vim',
+    event = "VeryLazy",
+    -- config = function()
+    --   require('copilot').setup()
+    -- end
   }
 
 }
